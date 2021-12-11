@@ -6,7 +6,7 @@ from resources import convert_ascii
 def runThrough(Rotor_num,input,Rotor_setting):
     input = (input+Rotor_setting) % 127;
     return wiring[Rotor_num][input];
-x=2
+x=65
 y=0
 RotorSetting=[]
 tple=Rotors.Rotor()
@@ -30,17 +30,18 @@ for i in range(6,306):
     RotorSetting.append(0)
     
     Rotor_combination.append(i)
-RotorSetting[0]=12
-RotorSetting[5]=1
+RotorSetting[0]=1
+RotorSetting[5]=56
 RotorSetting[299]=120
-print(RotorSetting)   
 
+print(RotorSetting)   
+print(Rotor_combination)
 connectTo=x
 s=x
 f=0
 for i in range(0,300):
     s=runThrough(Rotor_combination[i],s,RotorSetting[i])
-    print(str(Rotor_combination[i])+':::'+str(s))
+    
     connectTo=s
 s=connectTo
 print('\n\n' + str(connectTo))

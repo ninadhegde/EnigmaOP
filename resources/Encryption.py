@@ -2,7 +2,6 @@
 
 from resources import Rotors
 
-
 #importing the mechine wirings
 tple=Rotors.Rotor()
 wiring=list(tple)

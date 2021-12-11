@@ -5,6 +5,7 @@ Created on Sat Dec 11 18:58:05 2021
 @author: ninad
 """
 from Rotors import *
+import Rotors
 #importing the mechine wirings
 import random
 
@@ -102,5 +103,5 @@ def encrypt(Rotor_combination,RotorSetting,x):
             triger=0
         counter+=1
         
-        return Rotor_combination,RotorSetting,connectTo 
+    return Rotor_combination,RotorSetting,connectTo 
         

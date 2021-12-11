@@ -1,12 +1,9 @@
 
 
-from resources import Rotors
-from resources import generate
-from resources import convert_ascii
-from resources import Encryption
+from Resources import *
 
 #importing the mechine wirings
-tple=Rotors.Rotor()
+tple=Rotor()
 wiring=list(tple)
 
 ascii_num=12
@@ -20,10 +17,10 @@ Rotor_combination=[69, 335, 81, 28, 70, 270, 294, 45, 83, 181, 236, 118, 203, 49
 initial_settings.append(Rotor_combination)
 initial_settings.append(Rotor_Setting)
 for i in input_string:
-    ascii_num=convert_ascii.tonum(i)
-    Rotor_combination,Rotor_Setting,ascii_num=Encryption.encrypt(Rotor_combination,Rotor_Setting,ascii_num)
+    ascii_num=tonum(i)
+    Rotor_combination,Rotor_Setting,ascii_num=encrypt(Rotor_combination,Rotor_Setting,ascii_num)
     var=ascii_num
-    cipher_text=cipher_text+convert_ascii.tochar(var)
+    cipher_text=cipher_text+tochar(var)
 print('Encrypted text= '+cipher_text)
 print('Key = ')
 print(initial_settings)
@@ -34,8 +31,8 @@ Rotor_Setting=[128, 32, 127, 10, 67, 29, 119, 60, 104, 91, 37, 57, 64, 71, 59, 1
 
 input_string=input('Enter Something for decryption')
 for i in input_string:
-    ascii_num=convert_ascii.tonum(i)
-    Rotor_combination,Rotor_Setting,ascii_num=Encryption.encrypt(Rotor_combination,Rotor_Setting,ascii_num)
+    ascii_num=tonum(i)
+    Rotor_combination,Rotor_Setting,ascii_num=decrypt(Rotor_combination,Rotor_Setting,ascii_num)
     var=ascii_num
-    cipher_text=cipher_text+convert_ascii.tochar(var)
+    cipher_text=cipher_text+tochar(var)
 print('Decrypted text= '+cipher_text)

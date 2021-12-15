@@ -28,7 +28,15 @@ def random_settings():
         s=random.choice(lst)
         Rotor_combination.append(s)
         lst.remove(s)
-    return Rotor_combination , RotorSetting
+    lst2=[0]*128    
+    lst2=random.sample(range(0, 127), 120)
+    plugboard=[-1]*128
+    for i in range(0,119,2):
+        key=lst2[i+1]
+        value=lst2[i]
+        plugboard[key]=value
+        plugboard[value]=key
+    return Rotor_combination , RotorSetting , plugboard
 def tochar(num):
     return chr(asciinumlist[num])
 def tonum(char):
@@ -44,6 +52,8 @@ wiring=list(tple)
 def runThrough(Rotor_num,input,Rotor_setting):
     input = (input+Rotor_setting) % 127;
     return wiring[Rotor_num][input];
+def plug(plugboard,key):
+    return plugboard[key]
 def decrypt(Rotor_combination,RotorSetting,x):
     connectTo=x
     s=x
@@ -77,7 +87,8 @@ wiring=list(tple)
 def runThrough(Rotor_num,input,Rotor_setting):
     input = (input+Rotor_setting) % 127;
     return wiring[Rotor_num][input];
-def encrypt(Rotor_combination,RotorSetting,x):
+def encrypt(Rotor_combination,RotorSetting,plugboard,x):
+    x=plug(plugboard,x)
     connectTo=x
     s=x
     
@@ -91,6 +102,7 @@ def encrypt(Rotor_combination,RotorSetting,x):
         connectTo=s
     triger=1
     counter=0
+    connectTo=plug(plugboard,connectTo)
     #incrementing the 1st rotor setting by 1     
     while triger==1:
         RotorSetting[counter]+=1

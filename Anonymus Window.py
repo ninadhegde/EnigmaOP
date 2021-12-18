@@ -38,4 +38,4 @@ for i in input_string:
     cipher_text=cipher_text+tochar(var)
 print('Decrypted text= '+cipher_text)
 print('Encrypted text= '+encode)
-print('Input text= '+input_string)
+print('Input text= '+encode)

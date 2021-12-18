@@ -84,9 +84,7 @@ import Rotors
 tple=Rotors.Rotor()
 wiring=list(tple)
 
-def runThrough(Rotor_num,input,Rotor_setting):
-    input = (input+Rotor_setting) % 127;
-    return wiring[Rotor_num][input];
+
 def encrypt(Rotor_combination,RotorSetting,plugboard,x):
     x=plug(plugboard,x)
     connectTo=x

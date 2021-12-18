@@ -8,6 +8,7 @@ wiring=list(tple)
 
 ascii_num=12
 input_string=input('Enter Something for encryption')
+copyinput=input_string
 cipher_text=''
 initial_settings=[]
 plugboard={}
@@ -30,7 +31,7 @@ x=cipher_text
 
 Rotor_combination,Rotor_Setting,plugboard=initial_settings[0],initial_settings[1],initial_settings[2]
 cipher_text=''
-input_string=x
+input_string=copyinput
 for i in input_string:
     ascii_num=tonum(i)
     Rotor_combination,Rotor_Setting,ascii_num=encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)

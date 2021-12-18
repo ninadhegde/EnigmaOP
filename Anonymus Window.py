@@ -1,13 +1,41 @@
+from Resources import *
+import numpy
+#importing the mechine wirings
+tple=Rotor()
+wiring=list(tple)
 
-import random
+ascii_num=12
+input_string=input('Enter Something for encryption')
+copyinput=input_string
+cipher_text=''
+initial_settings=[]
+plugboard={}
 
-lst2=[0]*128    
-lst2=random.sample(range(0, 127), 120)
-plugs=[-1]*128
-for i in range(0,119,2):
-    key=lst2[i+1]
-    value=lst2[i]
-    print(key)
-    print(value)
-    plugs[key]=value
-    plugs[value]=key
+
+Rotor_combination,Rotor_Setting,plugboard=random_settings()
+initial_settings.append(Rotor_combination)
+initial_settings.append(Rotor_Setting)
+initial_settings.append(plugboard)
+
+for i in input_string:
+    ascii_num=tonum(i)
+    Rotor_combination,Rotor_Setting,ascii_num=encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
+    var=ascii_num
+    cipher_text=cipher_text+tochar(var)
+encode=cipher_text
+print('Encrypted text= '+cipher_text)
+print('Key = '+str(initial_settings))
+x=''
+x=cipher_text
+
+Rotor_combination,Rotor_Setting,plugboard=initial_settings[0],initial_settings[1],initial_settings[2]
+cipher_text=''
+input_string=copyinput
+for i in input_string:
+    ascii_num=tonum(i)
+    Rotor_combination,Rotor_Setting,ascii_num=encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
+    var=ascii_num
+    cipher_text=cipher_text+tochar(var)
+print('Decrypted text= '+cipher_text)
+print('Encrypted text= '+encode)
+print('Input text= '+input_string)

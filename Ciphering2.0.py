@@ -12,12 +12,13 @@ copyinput=input_string
 cipher_text=''
 initial_settings=[]
 plugboard={}
-#Rotor_combination,Rotor_Setting,plugboard=random_settings()
+
 
 Rotor_combination,Rotor_Setting,plugboard=random_settings()
 initial_settings.append(Rotor_combination)
 initial_settings.append(Rotor_Setting)
 initial_settings.append(plugboard)
+
 for i in input_string:
     ascii_num=tonum(i)
     Rotor_combination,Rotor_Setting,ascii_num=encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
@@ -39,3 +40,4 @@ for i in input_string:
     cipher_text=cipher_text+tochar(var)
 print('Decrypted text= '+cipher_text)
 print('Encrypted text= '+encode)
+print('Key = '+str(initial_settings))

@@ -4,8 +4,10 @@ Created on Mon Dec 20 13:02:36 2021
 
 @author: ninad
 """
+
 import Rotors
 wiring=Rotors.Rotor()
+RotorSettingopz=[]
 def runThrough(Rotor_num,inputy,Rotor_settingy):
     inputy = (inputy+Rotor_settingy) % 127;
     return wiring[Rotor_num][inputy];
@@ -39,5 +41,6 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
         else:
             triger=0
         counter+=1
-        
-    return Rotor_combinationz,RotorSettingz,connectTo
+        RotorSettingopz=RotorSettingz
+        RotorSettingz=[]
+    return Rotor_combinationz,RotorSettingopz,connectTo

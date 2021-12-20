@@ -29,23 +29,28 @@ initial_settings.append(plugboard)
 
 for i in input_string:
     ascii_num=convert.tonum(i)
+    print(ascii_num)
     Rotor_combination,Rotor_Setting,ascii_num=cipher.encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
     var=ascii_num
+    print("var : "+str(var))
     cipher_text=cipher_text+convert.tochar(var)
 encode=cipher_text
 print('Encrypted text= '+cipher_text)
-print('Key = '+str(initial_settings))
+#print('Key = '+str(initial_settings))
 x=''
 x=cipher_text
-
-Rotor_combination,Rotor_Setting,plugboard=initial_settings[0],initial_settings[1],initial_settings[2]
+Rotor_Setting=[]
+Rotor_combinationx,Rotor_Settingx,plugboardx=initial_settings[0],initial_settings[1],initial_settings[2]
 cipher_text=''
-input_string=copyinput
+input_string=x
 for i in input_string:
     ascii_num=convert.tonum(i)
-    Rotor_combination,Rotor_Setting,ascii_num=cipher.encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
+    print(ascii_num)
+    Rotor_combinationx,Rotor_Settingx,ascii_num=cipher.encrypt(Rotor_combinationx,Rotor_Settingx,plugboard,ascii_num)
     var=ascii_num
+    print("var : "+str(var))
     cipher_text=cipher_text+convert.tochar(var)
+print(''+input_string)
 print('Decrypted text= '+cipher_text)
 print('Encrypted text= '+encode)
 print('Input text= '+copyinput)

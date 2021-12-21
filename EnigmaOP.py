@@ -47,7 +47,6 @@ for i in input_string:
     var=ascii_num
     #print("var : "+str(var))
     cipher_text=cipher_text+convert.tochar(var)
-print(''+input_string)
 print('Decrypted text= '+cipher_text)
 print('Encrypted text= '+encode)
 print('Input text= '+copyinput)

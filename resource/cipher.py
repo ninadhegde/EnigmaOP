@@ -27,10 +27,10 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
         Backlist=wiring[Rotor_combinationz[i]]
         s=runThrough(Rotor_combinationz[i],Backlist.index(s),RotorSettingz[i])
         connectTo=s
-    
+    connectTo=plug(plugboardz,connectTo)
     triger=1
     counter=0
-    connectTo=plug(plugboardz,connectTo)
+    
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
         RotorSettingz[counter]+=1

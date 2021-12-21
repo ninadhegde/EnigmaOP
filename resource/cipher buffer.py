@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 21 20:28:32 2021
+
+@author: ninad
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Dec 20 13:02:36 2021
+
+@author: ninad
+"""
 
 import Rotors
 wiring=Rotors.Rotor()
@@ -21,18 +34,43 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
         s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
         connectTo=s
     s=reflector[s]
-    
     for i in range(299,-1,-1):
-        Backlist=[]
-        Backlist=wiring[Rotor_combinationz[i]]
-        s=runThrough(Rotor_combinationz[i],Backlist.index(s),RotorSettingz[i])
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
         connectTo=s
-    
     triger=1
     counter=0
     connectTo=plug(plugboardz,connectTo)
     #incrementing the 1st rotor setting by 1     
-    while triger==1 and counter<300:
+    while triger==1:
+        RotorSettingz[counter]+=1
+        if RotorSettingz[counter]>127:
+            RotorSettingz[counter]=0
+        else:
+            triger=0
+        counter+=1
+        RotorSettingopz=RotorSettingz
+        RotorSettingz=[]
+    return Rotor_combinationz,RotorSettingopz,connectTo
+def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
+    x=plug(plugboardz,x)
+    connectTo=x
+    s=x
+    
+    #ciphering block
+    s=reflector[s]
+    for i in range(299,-1,-1):
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
+        connectTo=s
+    s=reflector[s]
+    
+    for i in range(0,300):
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
+        connectTo=s
+    triger=1
+    counter=0
+    connectTo=plug(plugboardz,connectTo)
+    #incrementing the 1st rotor setting by 1     
+    while triger==1:
         RotorSettingz[counter]+=1
         if RotorSettingz[counter]>127:
             RotorSettingz[counter]=0

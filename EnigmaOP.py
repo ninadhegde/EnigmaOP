@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Dec 20 13:19:38 2021
-
 @author: ninad
 """
 from resource import Rotors
@@ -23,16 +22,15 @@ plugboard={}
 
 
 Rotor_combination,Rotor_Setting,plugboard=generate.random_settings()
-initialsettings.append(Rotor_combination)
-initialsettings.append(Rotor_Setting)
-initialsettings.append(plugboard)
+initialsettings.append(tuple(Rotor_combination))
+initialsettings.append(tuple(Rotor_Setting))
+initialsettings.append(tuple(plugboard))
 initial_settings=tuple(initialsettings)
 for i in input_string:
     ascii_num=convert.tonum(i)
-    print(ascii_num)
     Rotor_combination,Rotor_Setting,ascii_num=cipher.encrypt(Rotor_combination,Rotor_Setting,plugboard,ascii_num)
     var=ascii_num
-    print("var : "+str(var))
+#    print("var : "+str(var))
     cipher_text=cipher_text+convert.tochar(var)
 encode=cipher_text
 print('Encrypted text= '+cipher_text)
@@ -40,15 +38,14 @@ print('Encrypted text= '+cipher_text)
 x=''
 x=cipher_text
 Rotor_Setting=[]
-Rotor_combinationx,Rotor_Settingx,plugboardx=initial_settings[0],initial_settings[1],initial_settings[2]
+Rotor_combinationx,Rotor_Settingx,plugboardx=initial_settings[0],list(initial_settings[1]),initial_settings[2]
 cipher_text=''
 input_string=x
 for i in input_string:
     ascii_num=convert.tonum(i)
-    print(ascii_num)
     Rotor_combinationx,Rotor_Settingx,ascii_num=cipher.encrypt(Rotor_combinationx,Rotor_Settingx,plugboard,ascii_num)
     var=ascii_num
-    print("var : "+str(var))
+    #print("var : "+str(var))
     cipher_text=cipher_text+convert.tochar(var)
 print(''+input_string)
 print('Decrypted text= '+cipher_text)

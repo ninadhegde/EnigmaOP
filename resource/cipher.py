@@ -15,19 +15,24 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     x=plug(plugboardz,x)
     connectTo=x
     s=x
-    
+    print('after plugging = '+str(x))
     #ciphering block
-    for i in range(0,300):
+    for i in range(0,1):
+        
         s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
         connectTo=s
+        print('after roter : '+str(i)+' = '+str(s))
     s=reflector[s]
     
-    for i in range(299,-1,-1):
+    for i in range(0,-1,-1):
+
         Backlist=[]
         Backlist=wiring[Rotor_combinationz[i]]
         s=runThrough(Rotor_combinationz[i],Backlist.index(s),RotorSettingz[i])
         connectTo=s
+        print('after roterRevr : '+str(i)+' = '+str(s))
     connectTo=plug(plugboardz,connectTo)
+    print('after plugging = '+str(connectTo))
     triger=1
     counter=0
     

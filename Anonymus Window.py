@@ -1,4 +1,10 @@
+def get_key(val):
+    for key, value in x.items():
+         if val == value:
+             return key
 
-for i in range(299,-1,-1):
-    s=runThrough(Rotor_combinationz[i],(wiring[Rotor_combinationz[i-1]]).index(s),RotorSettingz[i])
-    connectTo=s
+x={1:2,3:4}
+print(get_key(2))
+print(type(x))
+
+

@@ -59,38 +59,3 @@ def plug(plugboard,key):
 
 
 
-def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
-    #forward plugboard
-    x=plug(plugboardz,x)
-    connectTo=x
-    s=x
-    
-    #Forward block
-    for i in range(0,300):
-        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
-        connectTo=s
-    #reflector
-    s=reflector[s]
-    
-    #Backword connection block
-    for z in range(0,300):
-        i=299-z
-        Backlist=[]
-        Backlist=wiring[Rotor_combinationz[i]]
-        s=runThrough(Rotor_combinationz[i],Backlist.index(connectTo),RotorSettingz[i])
-        connectTo=s
-    
-    #reverse plugboard
-    connectTo=plug(plugboardz,connectTo)
-    triger=1
-    counter=0
-    #incrementing the 1st rotor setting by 1     
-    while triger==1:
-        RotorSettingz[counter]+=1
-        if RotorSettingz[counter]>127:
-            RotorSettingz[counter]=0
-        else:
-            triger=0
-        counter+=1
-        
-    return Rotor_combinationz,RotorSettingz,connectTo 

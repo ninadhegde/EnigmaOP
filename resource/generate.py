@@ -19,10 +19,10 @@ def random_settings():
         lstx.remove(s)
     lst2x=[0]*128    
     lst2x=random.sample(range(0, 128), 120)
-    plugboardx=[-1]*128
+    plugboardx={}
     for i in range(0,119,2):
         key=lst2x[i+1]
         value=lst2x[i]
         plugboardx[key]=value
-        plugboardx[value]=key
+        
     return Rotor_combinationx , RotorSettingx , plugboardx

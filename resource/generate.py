@@ -24,5 +24,5 @@ def random_settings():
         key=lst2x[i+1]
         value=lst2x[i]
         plugboardx[key]=value
-        
+        plugboardx[value]=key
     return Rotor_combinationx , RotorSettingx , plugboardx

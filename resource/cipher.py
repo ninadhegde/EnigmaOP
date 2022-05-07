@@ -20,11 +20,9 @@ def plug(plugboard,key):
     try:
         return plugboard[key]
     except KeyError:
-        try:
-            return get_key(plugboard[key])
-        except KeyError:
-            
-            return key
+        
+        return key
+        
 
 
 def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
@@ -35,6 +33,7 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     connectTo=x
     s=x
     print('after plugging = '+str(x))
+    
     #Forward block
     for i in range(0,3):
         
@@ -43,24 +42,25 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
         print('after roter : '+str(i)+' = '+str(s))
     
    
-    
+        
     #Reflector
     s=reflector[s]
     print('after reflector :  = '+str(s))
-    '''
+    
     #Reverse Block
     for z in range(0,3):
         i=2-z
-        Backlist=wiring[Rotor_combinationz[i]]
-        s=runThrough(Rotor_combinationz[i],get_key(Backlist,s),RotorSettingz[i])
+        
+        s=runThrough(Rotor_combinationz[i],get_key(wiring[Rotor_combinationz[i]],s),RotorSettingz[i])
         
         print('after roterRevr : '+str(i)+' = '+str(s))
-    '''
+    
     connectTo=s
     
     #Reverse plugboard
     connectTo=plug(plugboardz,connectTo)
     print('after plugging = '+str(connectTo))
+    
     triger=1
     counter=0
     
@@ -83,14 +83,13 @@ def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     connectTo=x
     s=x
     print('after plugging = '+str(x))
-    #Reverse Block
-    for z in range(0,3):
-        i=2-z
-        Backlist={}
-        Backlist=wiring[Rotor_combinationz[i]]
-        s=runThrough(Rotor_combinationz[i],get_key(Backlist,s),RotorSettingz[i])
+    
+     #Forward block
+    for i in range(0,3):
+        
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
         connectTo=s
-        print('after roterRevr : '+str(i)+' = '+str(s))
+        print('after roter : '+str(i)+' = '+str(s))
     
         
     
@@ -98,18 +97,19 @@ def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     s=reflector[s]
     print('after reflector :  = '+str(s))
     
-    '''
-    #Forward block
-    for i in range(0,3):
-        
-        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
+    
+    #Reverse Block
+    for z in range(0,3):
+        i=2-z
+        s=runThrough(Rotor_combinationz[i],get_key(wiring[Rotor_combinationz[i]],s),RotorSettingz[i])
         connectTo=s
-        print('after roter : '+str(i)+' = '+str(s))
-    '''
+        print('after roterRevr : '+str(i)+' = '+str(s))
+    
     
     #Reverse plugboard
     connectTo=plug(plugboardz,connectTo)
     print('after plugging = '+str(connectTo))
+    
     triger=1
     counter=0
     

@@ -9,7 +9,7 @@ def get_key(x,val):
     
     for key, value in x.items():
          if val == value:
-             return key
+             return value
          
 
 def runThrough(Rotor_num,inputy,Rotor_settingy):
@@ -75,19 +75,19 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
         RotorSettingopz=RotorSettingz
         RotorSettingz=[]
     return Rotor_combinationz,RotorSettingopz,connectTo
-def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
+def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     
     #forward plugboard
-    x=plug(plugboardz,x)
+    x=plug(plugboard,x)
     
-    connectTo=x
+    
     s=x
     print('after plugging = '+str(x))
     
      #Forward block
     for i in range(0,3):
         
-        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
+        s=runThrough(Rotor_combination[i],s,RotorSetting[i])
         connectTo=s
         print('after roter : '+str(i)+' = '+str(s))
     
@@ -101,13 +101,13 @@ def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     #Reverse Block
     for z in range(0,3):
         i=2-z
-        s=runThrough(Rotor_combinationz[i],get_key(wiring[Rotor_combinationz[i]],s),RotorSettingz[i])
+        s=runThrough(Rotor_combination[i],get_key(wiring[Rotor_combination[i]],s),RotorSetting[i])
         connectTo=s
         print('after roterRevr : '+str(i)+' = '+str(s))
     
     
     #Reverse plugboard
-    connectTo=plug(plugboardz,connectTo)
+    connectTo=plug(plugboard,connectTo)
     print('after plugging = '+str(connectTo))
     
     triger=1
@@ -115,15 +115,15 @@ def decrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
-        RotorSettingz[counter]+=1
-        if RotorSettingz[counter]>127:
-            RotorSettingz[counter]=0
+        RotorSetting[counter]+=1
+        if RotorSetting[counter]>127:
+            RotorSetting[counter]=0
         else:
             triger=0
         counter+=1
-        RotorSettingopz=RotorSettingz
-        RotorSettingz=[]
-    return Rotor_combinationz,RotorSettingopz,connectTo
+        RotorSettingop=RotorSetting
+        RotorSetting=[]
+    return Rotor_combination,RotorSettingop,connectTo
 '''def findx(lst,ele):
     for i in range(0,len(lst)):
         if ele==lst[i]:

@@ -66,7 +66,8 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
-        RotorSettingz[counter]+=1
+        #print(RotorSettingz)
+        RotorSettingz[counter]=RotorSettingz[counter]+1
         if RotorSettingz[counter]>127:
             RotorSettingz[counter]=0
         else:
@@ -112,17 +113,21 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     
     triger=1
     counter=0
-    
+    #print('base setting'+ str(RotorSetting))
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
+        print(RotorSetting)
         RotorSetting[counter]+=1
         if RotorSetting[counter]>127:
             RotorSetting[counter]=0
+            #print('inside while if'+ str(RotorSetting))
         else:
             triger=0
+            #print('inside while else'+str(RotorSetting))
         counter+=1
         RotorSettingop=RotorSetting
-        RotorSetting=[]
+        
+        #print('before return'+str(RotorSetting))
     return Rotor_combination,RotorSettingop,connectTo
 '''def findx(lst,ele):
     for i in range(0,len(lst)):

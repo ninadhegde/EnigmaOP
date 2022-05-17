@@ -5,11 +5,16 @@ reflector=[127, 126, 125, 124, 123, 122, 121, 120, 119, 118, 117, 116, 115, 114,
 wiring=Rotors.Rotor()
 RotorSettingopz=[]
 
-def get_key(x,val):
-    
+def get_key(wire_dict,val):
+    '''
     for key, value in x.items():
          if val == value:
-             return value
+             return key
+    '''
+    key_list = list(wire_dict.keys())
+    val_list = list(wire_dict.values())
+    position=val_list.index(val)
+    return key_list[position]
          
 
 def runThrough(Rotor_num,inputy,Rotor_settingy):

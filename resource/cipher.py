@@ -17,9 +17,21 @@ def get_key(wire_dict,val):
     return key_list[position]
          
 
-def runThrough(Rotor_num,inputy,Rotor_settingy):
+def runThrough(Rotor_num,inputy,Rotor_settingy,forward):
     inputy = (inputy+Rotor_settingy) % 127;
-    return wiring[Rotor_num][inputy];
+    if forward: 
+        
+        return wiring[Rotor_num][inputy];
+    else:
+        return get_key(wiring[Rotor_num],inputy)
+        '''for i in range(0,127):
+            if inputy== get_key(wiring[Rotor_num], wiring[Rotor_num][i]):
+                output=wiring[Rotor_num][i]-Rotor_settingy
+                while output<0:
+                    output=127+output
+                output=output%127
+                return output
+          '''      
 
 def plug(plugboard,key):
     try:
@@ -42,9 +54,9 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     #Forward block
     for i in range(0,3):
         
-        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i])
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i],True)
         connectTo=s
-        print('after roter : '+str(i)+' = '+str(s))
+        print('after roter : '+str(Rotor_combinationz[i])+' = '+str(s))
     
    
         
@@ -56,9 +68,9 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     for z in range(0,3):
         i=2-z
         
-        s=runThrough(Rotor_combinationz[i],get_key(wiring[Rotor_combinationz[i]],s),RotorSettingz[i])
+        s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i],False)
         
-        print('after roterRevr : '+str(i)+' = '+str(s))
+        print('after roterRevr : '+str(Rotor_combinationz[i])+' = '+str(s))
     
     connectTo=s
     
@@ -71,15 +83,19 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
-        #print(RotorSettingz)
-        RotorSettingz[counter]=RotorSettingz[counter]+1
+        
+        
+        RotorSettingz[counter]+=1
         if RotorSettingz[counter]>127:
-            RotorSettingz[counter]=0
+            for i in range(len(RotorSettingz)):
+                if RotorSettingz[i] == 0:
+                    i=counter
+                    
+                    RotorSettingz[i]= 0
         else:
             triger=0
         counter+=1
         RotorSettingopz=RotorSettingz
-        RotorSettingz=[]
     return Rotor_combinationz,RotorSettingopz,connectTo
 def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     
@@ -93,9 +109,9 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
      #Forward block
     for i in range(0,3):
         
-        s=runThrough(Rotor_combination[i],s,RotorSetting[i])
+        s=runThrough(Rotor_combination[i],s,RotorSetting[i],True)
         connectTo=s
-        print('after roter : '+str(i)+' = '+str(s))
+        print('after roter : '+str(Rotor_combination[i])+' = '+str(s))
     
         
     
@@ -107,9 +123,9 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     #Reverse Block
     for z in range(0,3):
         i=2-z
-        s=runThrough(Rotor_combination[i],get_key(wiring[Rotor_combination[i]],s),RotorSetting[i])
+        s=runThrough(Rotor_combination[i],s,RotorSetting[i],False)
         connectTo=s
-        print('after roterRevr : '+str(i)+' = '+str(s))
+        print('after roterRevr : '+str(Rotor_combination[i])+' = '+str(s))
     
     
     #Reverse plugboard
@@ -121,7 +137,7 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     #print('base setting'+ str(RotorSetting))
     #incrementing the 1st rotor setting by 1     
     while triger==1 and counter<300:
-        print(RotorSetting)
+        #print(RotorSetting)
         RotorSetting[counter]+=1
         if RotorSetting[counter]>127:
             RotorSetting[counter]=0

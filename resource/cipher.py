@@ -18,20 +18,26 @@ def get_key(wire_dict,val):
          
 
 def runThrough(Rotor_num,inputy,Rotor_settingy,forward):
-    inputy = (inputy+Rotor_settingy) % 127;
+    
+    
     if forward: 
-        
+        inputy = (inputy+Rotor_settingy) % 127
+        print('inside runthrough :\tinput = '+str(inputy))
         return wiring[Rotor_num][inputy];
     else:
+        
+        inputy = (inputy+Rotor_settingy) % 127
+        print('inside runthrough :\tinput = '+str(inputy))
         return get_key(wiring[Rotor_num],inputy)
-        '''for i in range(0,127):
+        '''
+        for i in range(0,127):
             if inputy== get_key(wiring[Rotor_num], wiring[Rotor_num][i]):
                 output=wiring[Rotor_num][i]-Rotor_settingy
                 while output<0:
                     output=127+output
                 output=output%127
                 return output
-          '''      
+         '''     
 
 def plug(plugboard,key):
     try:
@@ -65,8 +71,8 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
     print('after reflector :  = '+str(s))
     
     #Reverse Block
-    for z in range(0,3):
-        i=2-z
+    for i in range(2,-1,-1):
+        
         
         s=runThrough(Rotor_combinationz[i],s,RotorSettingz[i],False)
         
@@ -121,8 +127,8 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     
     
     #Reverse Block
-    for z in range(0,3):
-        i=2-z
+    for i in range(2,-1,-1):
+        
         s=runThrough(Rotor_combination[i],s,RotorSetting[i],False)
         connectTo=s
         print('after roterRevr : '+str(Rotor_combination[i])+' = '+str(s))

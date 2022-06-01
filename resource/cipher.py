@@ -25,19 +25,19 @@ def runThrough(Rotor_num,inputy,Rotor_settingy,forward):
         print('inside runthrough :\tinput = '+str(inputy))
         return wiring[Rotor_num][inputy];
     else:
-        
-        inputy = (inputy+Rotor_settingy) % 127
-        print('inside runthrough :\tinput = '+str(inputy))
-        return get_key(wiring[Rotor_num],inputy)
         '''
-        for i in range(0,127):
-            if inputy== get_key(wiring[Rotor_num], wiring[Rotor_num][i]):
-                output=wiring[Rotor_num][i]-Rotor_settingy
+        #inputx = (inputy+Rotor_settingy) % 127
+        print('inside runthrough :\trev input = '+str(inputy))
+        return (get_key(wiring[Rotor_num],inputy)+Rotor_settingy)%127
+        '''
+        for i in range(0,128):
+            if inputy== wiring[Rotor_num][i]:
+                output=i-Rotor_settingy
                 while output<0:
                     output=127+output
                 output=output%127
                 return output
-         '''     
+              
 
 def plug(plugboard,key):
     try:
@@ -102,7 +102,9 @@ def encrypt(Rotor_combinationz,RotorSettingz,plugboardz,x):
             triger=0
         counter+=1
         RotorSettingopz=RotorSettingz
-    return Rotor_combinationz,RotorSettingopz,connectTo
+    
+    return Rotor_combinationz,RotorSettingz,connectTo
+
 def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     
     #forward plugboard
@@ -141,7 +143,8 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
     triger=1
     counter=0
     #print('base setting'+ str(RotorSetting))
-    #incrementing the 1st rotor setting by 1     
+    #incrementing the 1st rotor setting by 1  
+    
     while triger==1 and counter<300:
         #print(RotorSetting)
         RotorSetting[counter]+=1
@@ -155,7 +158,9 @@ def decrypt(Rotor_combination,RotorSetting,plugboard,x):
         RotorSettingop=RotorSetting
         
         #print('before return'+str(RotorSetting))
-    return Rotor_combination,RotorSettingop,connectTo
+    
+    return Rotor_combination,RotorSetting,connectTo
+
 '''def findx(lst,ele):
     for i in range(0,len(lst)):
         if ele==lst[i]:
